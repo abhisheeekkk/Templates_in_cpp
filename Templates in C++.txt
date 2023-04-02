@@ -1,0 +1,182 @@
+Simple program
+
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+
+class vector
+{
+    public :
+    T * arr;
+    int size;
+    
+        vector(int m)
+        {
+            size =m;
+            arr = new T[size];
+        }
+    T dotpro(vector &v)
+    {
+        T d = 0;
+        for(int i = 0; i< size; i++)
+        {
+            d += this->arr[i] * v.arr[i];
+            
+        }
+        return d;
+    }
+    
+};
+int main() {
+// 	vector<int> v1(3);
+	
+// 	v1.arr[0]  = 4;
+// 	v1.arr[1]  = 3;
+// 	v1.arr[2]  = 1;
+	
+// 	vector<int> v2(3);
+// 	v2.arr[0]  = 0;
+// 	v2.arr[1]  = 3;
+// 	v2.arr[2]  = 1;
+	
+//     int a =	v1.dotpro(v2);
+//     cout<<a<<endl;
+    
+    vector<float> v1(3);
+	
+	v1.arr[0]  = 4;
+	v1.arr[1]  = 3.3;
+	v1.arr[2]  = 1;
+	
+	vector<float> v2(3);
+	v2.arr[0]  = 0;
+	v2.arr[1]  = 3;
+	v2.arr[2]  = 1;
+	
+    float b =	v1.dotpro(v2);
+    cout<<b<<endl;
+	return 0;
+}
+
+Multiple parameters in templates in the classs,  but it's very simple, templates are nothing but tells classes that we are going to use T1 and T2 datatype.
+
+#include <iostream>
+using namespace std;
+
+template <class T1, class T2>
+
+class myc
+{
+    public :
+    
+    T1 data1;
+    T2 data2;
+    
+    myc(T1 a, T2 b)
+    {
+        data1 = a;
+        data2 = b;
+    }
+    
+    void display()
+    {
+        cout<<this->data1<<" "<<this->data2<<endl;
+    }
+    
+};
+int main() {
+    myc<int, char>obj(1, 'x');
+    obj.display();
+    
+	return 0;
+}
+
+
+//Now we will see how to use templates in the function, better than functional overloading.
+
+#include <iostream>
+using namespace std;
+
+// float duncavg(int a , int b)
+// {
+//     float avg = (a+b)/2;
+//     return avg;
+// }
+
+// float duncavg(float a , int b)
+// {
+//     float avg = (a+b)/2;
+//     return avg;
+// }
+
+template <class T1, class T2>   //function template, same as class template
+
+float duncavg(T1 a , T2 b)
+{
+    float avg = (a+b)/2;
+    return avg;
+}
+int main() {
+    float aa = duncavg(5, 7);
+    cout<<aa<<endl;
+    
+    float x = duncavg((float)7.5, 7);
+    cout<<x<<endl;
+    
+	return 0;
+}
+
+//Member function templates and function overloading
+
+#include <iostream>
+using namespace std;
+
+
+template <class T>   //function template, same as class template
+
+class abhi{
+    public:
+    T data;
+    
+    abhi (T a)
+    {
+        data = a;
+    }
+    void display();
+};
+
+template <class T>
+void abhi<T>::display()
+{
+    cout<<data<<endl;
+}
+
+//Now see how to overload template function, when the functions exactly match then priority oof template function will be lower
+
+void printt(int xx)
+{
+    cout<<"who do you think will be printed"<<endl;
+}
+
+
+template <class T>
+void printt(T xx)
+{
+    cout<<"do i stand a chance --->> template"<<endl;
+
+}
+
+
+int main() {
+    abhi<float> obj(3.14);
+    obj.display();
+    
+    printt(5);
+	return 0;
+}
+
+//output of the program
+//3.14
+// who do you think will be printed
